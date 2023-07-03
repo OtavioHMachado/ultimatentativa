@@ -1,7 +1,12 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
+const { DataTypes } = require("sequelize");
+const sequelize = require("../config/database");
 
-const Categoria = sequelize.define('Categoria', {
+const Categoria = sequelize.define("Categoria", {
+  id_categoria: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
   nome: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -13,18 +18,18 @@ const Categoria = sequelize.define('Categoria', {
   await Categoria.sync();
 
   await Categoria.findOrCreate({
-    where: { nome: 'armazenagem' },
-    defaults: { nome: 'armazenagem' },
+    where: { nome: "armazenagem" },
+    defaults: { nome: "armazenagem" },
   });
 
   await Categoria.findOrCreate({
-    where: { nome: 'processamento' },
-    defaults: { nome: 'processamento' },
+    where: { nome: "processamento" },
+    defaults: { nome: "processamento" },
   });
 
-  console.log('Categorias criadas com sucesso.');
+  console.log("Categorias criadas com sucesso.");
 })().catch((error) => {
-  console.error('Erro ao criar categorias:', error);
+  console.error("Erro ao criar categorias:", error);
 });
 
 module.exports = Categoria;

@@ -10,7 +10,8 @@ exports.getComponentesByCategoria = async (req, res) => {
       include: [
         {
           model: Categoria,
-          where: { nome: categoria },
+          as: 'Categorium', // Utilize o nome correto da tabela associada
+          where: { nome_categoria: categoria }, // Utilize o nome correto da coluna na tabela associada
         },
       ],
     });
@@ -25,7 +26,7 @@ exports.getComponentesByCategoria = async (req, res) => {
 exports.getComponentes = async (req, res) => {
   try {
     const componentes = await Componente.findAll({
-      include: [Categoria],
+      include: [{ model: Categoria, as: 'Categorium' }], // Utilize o nome correto da tabela associada
     });
 
     res.json(componentes);
@@ -39,9 +40,8 @@ exports.createComponente = async (req, res) => {
   try {
     const { codigo_componente, nome_componente, desc_componente, CategoriaId } = req.body;
 
-    const novaCategoriaId = parseInt(CategoriaId, 10); // Converte o valor de CategoriaId para um número inteiro
 
-    const categoria = await Categoria.findByPk(novaCategoriaId);
+    const categoria = await Categoria.findByPk(CategoriaId);
 
     if (!categoria) {
       return res.status(400).json({ error: 'A categoria especificada não existe.' });
@@ -51,7 +51,7 @@ exports.createComponente = async (req, res) => {
       codigo_componente,
       nome_componente,
       desc_componente,
-      CategoriaId: novaCategoriaId, // Define o valor de CategoriaId ao criar o componente
+      CategoriaId // Define o valor de CategoriaId ao criar o componente
     });
 
     res.status(201).json(novoComponente);
