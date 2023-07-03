@@ -15,7 +15,7 @@ const Componente = sequelize.define("Componente", {
     type: DataTypes.TEXT,
     allowNull: false,
   },
-  CategoriaId: { // Atualização da chave estrangeira
+  CategoriaId: { 
     type: DataTypes.INTEGER,
     references: {
       model: Categoria,

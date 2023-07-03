@@ -21,7 +21,6 @@ exports.getEquipamentos = async (req, res) => {
 };
 
 // Criar um novo equipamento
-// Criar um novo equipamento
 exports.createEquipamento = async (req, res) => {
   try {
     const { nome_equipamento, ComponenteId } = req.body;

@@ -51,7 +51,7 @@ exports.createComponente = async (req, res) => {
       codigo_componente,
       nome_componente,
       desc_componente,
-      CategoriaId // Define o valor de CategoriaId ao criar o componente
+      CategoriaId 
     });
 
     res.status(201).json(novoComponente);
